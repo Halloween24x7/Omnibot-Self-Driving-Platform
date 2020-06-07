@@ -42,16 +42,16 @@ int CenterDistance = 0;
 
 // Speed Control
 float FifthGear = 1;
-float FourthGear = 0.80;
-float ThirdGear = 0.60;
-float SecondGear = 0.40;
+float FourthGear = 0.90;
+float ThirdGear = 0.80;
+float SecondGear = 0.50;
 float FirstGear = 0.30;
 
-float FifthDistance = 800;
-float FourthDistance = 700;
-float ThirdDistance = 600;
-float SecondDistance = 500;
-float FirstDistance = 400;
+float FifthDistance = 1000;
+float FourthDistance = 800;
+float ThirdDistance = 500;
+float SecondDistance = 300;
+float FirstDistance = 200;
 
 void MoveBack()
 {
@@ -173,29 +173,53 @@ void loop() {
             if(i==1)
       {
         CenterDistance = sensor->readRangeContinuousMillimeters();
+//        if ((CenterDistance >= FifthDistance)) { ABS = ABSMax*FifthGear; BBS = BBSMax*FifthGear; Serial.println("Fifth Gear"); }
+//        else if ((CenterDistance >= FourthDistance)) { ABS = ABSMax*FourthGear; BBS = BBSMax*FourthGear; Serial.println("Fourth Gear"); }
+//        else if ((CenterDistance >= ThirdDistance)) { ABS = ABSMax*ThirdGear; BBS = BBSMax*ThirdGear; Serial.println("Third Gear"); }
+//        else if ((CenterDistance >= SecondDistance)) { ABS = ABSMax*SecondGear; BBS = BBSMax*SecondGear; Serial.println("Second Gear"); }
+//        else if ((CenterDistance >= FirstDistance)) { ABS = ABSMax*FirstGear; BBS = BBSMax*FirstGear; Serial.println("First Gear"); }
+//        else { ABS = 0; BBS = 0;  Serial.println("Nuetral");}
 
-        if (CenterDistance >= FifthDistance) { ABS = ABSMax*FifthGear; BBS = BBSMax*FifthGear; Serial.println("Fifth Gear"); }
-        else if (CenterDistance >= FourthDistance) { ABS = ABSMax*FourthGear; BBS = BBSMax*FourthGear; Serial.println("Fourth Gear"); }
-        else if (CenterDistance >= ThirdDistance) { ABS = ABSMax*ThirdGear; BBS = BBSMax*ThirdGear; Serial.println("Third Gear"); }
-        else if (CenterDistance >= SecondDistance) { ABS = ABSMax*SecondGear; BBS = BBSMax*SecondGear; Serial.println("Second Gear"); }
-        else if (CenterDistance >= FirstDistance) { ABS = ABSMax*FirstGear; BBS = BBSMax*FirstGear; Serial.println("First Gear"); }
       }
             if(i==2)
       {
         RightDistance = sensor->readRangeContinuousMillimeters();
       }
-      
+
+
+          
     }
 
     if (sensor->timeoutOccurred()) {
       Serial.print(" [timeout]");
     }
-    Serial.print(";\t");
+    Serial.print(";\t");  
   }
 
   Serial.println();
 
+/*        if ((CenterDistance >= FifthDistance)) { ABS = ABSMax*FifthGear; BBS = BBSMax*FifthGear; Serial.println("Fifth Gear"); }
+        else if ((CenterDistance >= FourthDistance)) { ABS = ABSMax*FourthGear; BBS = BBSMax*FourthGear; Serial.println("Fourth Gear"); }
+        else if ((CenterDistance >= ThirdDistance)) { ABS = ABSMax*ThirdGear; BBS = BBSMax*ThirdGear; Serial.println("Third Gear"); }
+        else if ((CenterDistance >= SecondDistance)) { ABS = ABSMax*SecondGear; BBS = BBSMax*SecondGear; Serial.println("Second Gear"); }
+        else if ((CenterDistance >= FirstDistance)) { ABS = ABSMax*FirstGear; BBS = BBSMax*FirstGear; Serial.println("First Gear"); }*/
+
+/*
+        if ((LeftDistance >= FifthDistance) || (CenterDistance >= FifthDistance) || (RightDistance >= FifthDistance)) { ABS = ABSMax*FifthGear; BBS = BBSMax*FifthGear; Serial.println("Fifth Gear"); }
+        else if ((LeftDistance >= FourthDistance) || (CenterDistance >= FourthDistance) || (RightDistance >= FourthDistance)) { ABS = ABSMax*FourthGear; BBS = BBSMax*FourthGear; Serial.println("Fourth Gear"); }
+        else if ((LeftDistance >= ThirdDistance) || (CenterDistance >= ThirdDistance) || (RightDistance >= ThirdDistance)) { ABS = ABSMax*ThirdGear; BBS = BBSMax*ThirdGear; Serial.println("Third Gear"); }
+        else if ((LeftDistance >= SecondDistance) || (CenterDistance >= SecondDistance) || (RightDistance >= SecondDistance)) { ABS = ABSMax*SecondGear; BBS = BBSMax*SecondGear; Serial.println("Second Gear"); }
+        else if ((LeftDistance >= FirstDistance) || (CenterDistance >= FirstDistance) || (RightDistance >= FirstDistance)) { ABS = ABSMax*FirstGear; BBS = BBSMax*FirstGear; Serial.println("First Gear"); }
+*/
+
   delay(100);
+        if ((LeftDistance < FirstDistance) || (CenterDistance < FirstDistance) || (RightDistance < FirstDistance)) { ABS = ABSMax*FirstGear; BBS = BBSMax*FirstGear; Serial.println("First Gear"); }
+        else if ((LeftDistance < SecondDistance) || (CenterDistance < SecondDistance) || (RightDistance < SecondDistance)) { ABS = ABSMax*SecondGear; BBS = BBSMax*SecondGear; Serial.println("Second Gear"); }
+        else if ((LeftDistance < ThirdDistance) || (CenterDistance < ThirdDistance) || (RightDistance < ThirdDistance)) { ABS = ABSMax*ThirdGear; BBS = BBSMax*ThirdGear; Serial.println("Third Gear"); }
+        else if ((LeftDistance < FourthDistance) || (CenterDistance < FourthDistance) || (RightDistance < FourthDistance)) { ABS = ABSMax*FourthGear; BBS = BBSMax*FourthGear; Serial.println("Fourth Gear"); }
+        else if ((LeftDistance >= FifthDistance) || (CenterDistance >= FifthDistance) || (LeftDistance >= FifthDistance)) { ABS = ABSMax*FifthGear; BBS = BBSMax*FifthGear; Serial.println("Fifth Gear"); }
+
+//        else { ABS = 0; BBS = 0;  Serial.println("Nuetral");}
 
 
 
